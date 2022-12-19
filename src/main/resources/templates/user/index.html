@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>User</title>
+</head>
+<body>
+
+<div id="wrapper">
+  <div id="header">
+    <h2> Страница пользователя </h2>
+  </div>
+</div>
+
+<div id="container">
+  <div id="content">
+    <table>
+      <tr>
+        <th>ID</th>
+        <th>Имя</th>
+        <th>Фамилия</th>
+        <th>Возраст</th>
+        <th>e-mail</th>
+        <th>Роль</th>
+      </tr>
+      <tr >
+        <td th:text="${user.getId()}"></td>
+        <td th:text="${user.getUsername()}"></td>
+        <td th:text="${user.getLastname()}"></td>
+        <td th:text="${user.getAge}">User</td>
+        <td th:text="${user.getEmail()}"></td>
+        <td>
+          <th:block th:each="role : ${user.getRoles}" > <span th:text="${role.roleName.substring(5)}" class="space">Role</span>
+          </th:block>
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+<div id="logout">
+  <a href="/logout"> logout</a>
+</div>
+
+</body>
+</html>

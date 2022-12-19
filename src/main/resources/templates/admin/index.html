@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+  <title>Spring Security App Example</title>
+</head>
+<body>
+<div id="wrapper">
+  <div id="header">
+    <h2 class="center"> CRM Users</h2>
+  </div>
+</div>
+
+<div id="logout">
+  <a href="/logout"> logout</a>
+</div>
+
+<div>
+  <a href="/user/index">admin-page</a>
+</div>
+
+<br/>
+
+<input type="button" value="Добавить user" onclick="window.location.href='../auth/registration'; return false"/>
+
+<br/>
+
+<div id="container">
+  <div id="content">
+    <table>
+      <tr>
+        <th>Имя</th>
+        <th>Фамилия</th>
+        <th>Возраст</th>
+        <th>e-mail</th>
+        <th>Роль</th>
+        <th>Действие</th>
+      </tr>
+      <tr th:each="user : ${usersList}">
+        <td th:text="${user.getUsername}">User</td>
+        <td th:text="${user.getLastname}">User</td>
+        <td th:text="${user.getAge}">User</td>
+        <td th:text="${user.getEmail}">User</td>
+        <td>
+          <th:block th:each="role : ${user.getRoles}" > <span th:text="${role.roleName.substring(5)}" class="space">Role</span>
+          </th:block>
+        </td>
+
+        <td>
+          <a th:href="@{/admin/{id}/showFormForEdit(id=${user.getId()})}">Редактировать</a> | <a
+                th:href="@{/admin/{id}/delete(id=${user.getId()})}">Удалить</a>
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+
+</body>
+</html>

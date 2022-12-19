@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>user-add-form</title>
+</head>
+<body>
+
+<div id="wrapper">
+  <div id="header">
+    <h2> Добавление нового User </h2>
+  </div>
+</div>
+
+<div id="container">
+  <form th:method="POST" th:action="@{/auth/registration}" th:object="${user}">
+    <table>
+      <tbody>
+      <tr>
+        <td><label for="username">Введите имя: </label></td>
+        <td><input type="text" th:field="*{username}" id="username"/></td>
+        <div style="color:red" th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Ошибка в имени
+        </div>
+      <tr/>
+      <tr>
+        <td><label for="lastname">Фамилия: </label></td>
+        <td><input type="text" th:field="*{lastname}" id="lastname"/></td>
+        <div style="color:red" th:if="${#fields.hasErrors('lastname')}" th:errors="*{lastname}">Ошибка в
+          фамилии
+        </div>
+      <tr/>
+      <tr>
+        <td>Возраст</td>
+        <td><input type="number" th:field="${user.age}"/></td>
+      </tr>
+      <tr>
+        <td><label for="email">E-mail: </label></td>
+        <td><input type="text" th:field="*{email}" id="email"/></td>
+      <tr/>
+      <tr>
+        <td><label for="password">Пароль: </label></td>
+        <td><input type="text" th:field="*{password}" id="password"/></td>
+        <div style="color:red" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Ошибка в фамилии
+        </div>
+      <tr/>
+      <tr>
+        <td th:align="center" colspan="2">
+          <th:block th:each="role: ${roles}">
+            <input type="checkbox" th:field="*{roles}"
+                   th:text="${role.roleName}" th:value="${role.id}"/>
+          </th:block>
+        </td>
+      </tr>
+      <tr>
+        <td><label></label></td>
+        <td><input type="submit" value="Добавить"/></td>
+      <tr/>
+      </tbody>
+    </table>
+  </form>
+</div>
+
+<div>
+  <p>
+    <a href="/auth/login"><< Назад</a>
+  </p>
+</div>
+
+</body>
+</html>
